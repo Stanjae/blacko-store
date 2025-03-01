@@ -7,7 +7,7 @@ import React from 'react'
     category:string | string[] | undefined } */
 
 
-type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>
+type SearchParams = { [key: string]: string | string[] | undefined }
  
 //type Params = Promise<{ slug: string }>
 
