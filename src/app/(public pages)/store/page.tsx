@@ -2,8 +2,9 @@ import ProductStore from '@/app/components/layouts/ProductStore'
 import { getAllProducts } from '@/app/lib/data'
 import React from 'react'
 
-type SearchParams = { sort:string  | undefined; query:string |undefined; range:string | undefined; ratings: string | undefined; 
-    category:string | undefined }
+type SearchParams = { sort:string | string[] | undefined; query:string | string[] |undefined; 
+  range:string | string[] | undefined; ratings: string |string[] | undefined; 
+    category:string | string[] | undefined }
 //type Params = Promise<{ slug: string }>
 
 /* export async function generateMetadata(props: {
@@ -41,7 +42,7 @@ export default async function Page(props: {
 
     console.log('ol: ')
 
-    const response =  await getAllProducts(newSort, newQuery, newPriceRange, newRatings, newCategory);
+    const response =  await getAllProducts(newSort as string, newQuery as string, newPriceRange as string, newRatings as string, newCategory as string);
   return (
     <div>
       <ProductStore products={response}/>
