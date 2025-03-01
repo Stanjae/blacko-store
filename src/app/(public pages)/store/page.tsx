@@ -3,16 +3,18 @@ import { getAllProducts } from '@/app/lib/data'
 import React from 'react'
 
 type SearchParams = Promise<{ [key: string]: string  | undefined }>
+type Params = Promise<{ slug: string }>
 
 export async function generateMetadata(props: {
-  searchParams: SearchParams
+  searchParams: SearchParams; params:Params
 }) {
+  const params = await props.params
   const searchParams = await props.searchParams
   const query = searchParams.query
-  console.log(query)
+  console.log(query, params)
 }
 
-/* type Params = Promise<{ slug: string }>
+/* 
 
  
 
@@ -27,13 +29,16 @@ export default async function Page(props: {
   const query = searchParams.query
 } */
 
-const page = async( props: { searchParams: SearchParams }) => {
+const page = async( props: {params:Params; searchParams: SearchParams }) => {
     const searchParams = await props.searchParams
+    const params = await props.params
     const newSort =  searchParams?.sort
     const newQuery = searchParams?.query
     const newPriceRange = searchParams?.range;
     const newRatings = searchParams?.ratings
     const newCategory = searchParams?.category
+
+    console.log('ol: ', params)
 
     const response =  await getAllProducts(newSort, newQuery, newPriceRange, newRatings, newCategory);
   return (
