@@ -142,7 +142,9 @@ export default function PrimarySearchAppBar({session}:{session: Session | null})
             >
               <CustomLogo/>
             </Typography>
-            <CustomSearchBar/>
+            <React.Suspense>
+              <CustomSearchBar/>
+            </React.Suspense>
             <Box sx={{ display: 'flex' }}>
               <AddToCartNavBar/>
               {session?.user ?

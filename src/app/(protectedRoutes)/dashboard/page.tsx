@@ -65,13 +65,14 @@ function DemoPageContent({ pathname }: { pathname: string }) {
 
 export default function Page() {
 
-  const router = useDemoRouter('/page');
+  const router = useDemoRouter('/');
 
  
 
   return (
     // preview-start
-    <AppProvider
+    <React.Suspense>
+      <AppProvider
       navigation={NAVIGATION}
       router={router}
       theme={demoTheme}
@@ -85,6 +86,8 @@ export default function Page() {
         <DemoPageContent pathname={router.pathname} />
       </DashboardLayout>
     </AppProvider>
+    </React.Suspense>
+    
     // preview-end
   );
 }
