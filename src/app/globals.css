@@ -1,0 +1,50 @@
+ @tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.slideA-Bg{
+    background-image: url('../../public/banner-15.jpg');
+    background-repeat: no-repeat;
+}
+
+.slideB-Bg{
+    background-image: url('../../public/banner-25.jpg');
+    background-repeat: no-repeat;
+}
+
+.mask01{
+    /* clip-path: polygon(0 0, 100% 0%, 75% 100%, 0% 100%); */
+    clip-path: polygon(0 0, 100% 0%, 100% 100%, 10% 100%);
+}
+
+.Banner01Fd{
+    background-image: url('../../public/banners/banner-21.jpg');
+    background-repeat: no-repeat;
+}
+.Banner02Fd{
+    background-image: url('../../public/banners/banner-22.jpg');
+    background-repeat: no-repeat;
+}
+
+.candace:hover .candace-child{
+    right: 0px !important;
+    transition: all;
+    transition-duration: 500ms;
+}
+
+.long-banner{
+    background-image: url('../../public/banners/long-banner.jpg');
+    background-repeat: no-repeat;
+}
+
+
+.scrollNavbar{
+ animation-name: slideInFromTopanime;
+ animation-duration: 0.5s !important;
+}
+
+@keyframes slideInFromTopanime {
+    from { top:-50px}
+    to { top:0}
+  }
