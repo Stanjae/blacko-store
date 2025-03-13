@@ -16,8 +16,8 @@ export default async function CustomerPagesLayout({
       }
   return (
     <main>
-        <Grid2 gap={3} container>
-            <Grid2 size={3}>
+        <Grid2 spacing={{xs:3}} container>
+            <Grid2 size={{md:3, xs:12}}>
                 <SideNavBar userId={session?.user?.id}/>
             </Grid2>
             <Grid2 size="grow">

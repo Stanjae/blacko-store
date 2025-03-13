@@ -34,7 +34,7 @@ const page = async() => {
             </Card>
         </Grid2>
 
-        <Grid2 size={6}>
+        <Grid2 size={{md:6, xs:12}}>
           <Suspense fallback={<CardsListSkeleton amount={4}/>}>
             <CardList id={session?.user?.id}/>
           </Suspense>  

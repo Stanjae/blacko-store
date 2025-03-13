@@ -52,13 +52,13 @@ const CartLayout = ({states}:{states:string[]}) => {
  
   return (
     <Box component={'div'}>
-        <Grid2 spacing={3} container>
-            <Grid2 component={'div'} className=' space-y-5' size={8}>
+        <Grid2 spacing={{md:3, xs:1}} container>
+            <Grid2 component={'div'} className=' space-y-5' size={{md:8, xs:12}}>
                 {newCart.map((cartItem) =>(
                     <CartItem item={cartItem} key={cartItem._id}/>
                 ))} 
             </Grid2>
-            <Grid2 size={4}>
+            <Grid2 size={{md:4, xs:12}}>
                 <Paper component={'form'} onSubmit={handleSubmit(onSubmit)} className='p-4 space-y-5'>
                     <div className=' space-y-2'>
                         <Stack className=' items-center justify-between' direction={'row'}>

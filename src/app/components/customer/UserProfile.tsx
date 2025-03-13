@@ -8,7 +8,7 @@ const UserProfile = async({id}:{id:string | undefined}) => {
     const fullName = response?.fullname?.split(" ")
   return (
     <Paper elevation={0} className=' px-8 py-5'>
-        <Stack justifyContent={'space-between'} direction={'row'}>
+        <Stack justifyContent={'space-between'} spacing={{md:1, xs:3}} direction={{md:'row', xs:'column'}}>
             <Box>
                 <Typography color='textDisabled' gutterBottom className=' text-sm leading-[21px]'>First Name</Typography>
                 <Typography className=' leading-[21px] text-sm'>{fullName?.at(0)}</Typography>
