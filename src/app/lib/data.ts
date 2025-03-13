@@ -1,6 +1,6 @@
 import { client, clienty } from "@/sanity/client"
 import { allInfoType, CartProductType, DetailedProductStoreType, MonnfiyRespone } from "@/utils/definitions"
-import { revalidatePath } from "next/cache"
+import { revalidatePath, revalidateTag } from "next/cache"
 
 export const getVarietyProducts = async(status:string, limit:number)=>{
     const query = `*[_type == "product" && status == "${status}"] | order(_createdAt asc) [0..${limit}]`
@@ -100,6 +100,12 @@ export const createTransactionOrder =async(response:MonnfiyRespone, userInfo:all
         total_amount: response.authorizedAmount,
         note: userInfo.note,
         products,
+        eta:userInfo?.eta,
+        shipping_status:userInfo?.shipping_status,
+        shipping_fee:userInfo?.shipping_fee,
+        subtotal:userInfo?.subtotal,
+        tax:userInfo?.tax,
+        uid:userInfo?.uid,
         customer_zipcode: userInfo.zipcode,
         customer_country: userInfo.country,
         customer_state: userInfo.state,
@@ -175,3 +181,77 @@ export const updateProductQuantity = async (cart: CartProductType[]) => {
         }
       };
       
+
+//user
+
+export const getUserDetails = async(id:string | undefined)=>{
+  const query = `*[_type == "user" && _id == "${id}"][0]`
+    const response = await client.fetch(query)
+    return response
+}
+
+
+export const getUserOrdersCounts = async(uid:string|undefined)=>{
+  const allOrders = client.fetch(`count(*[_type == "order" && uid == "${uid}"])`)
+
+  const allProcessing = client.fetch(`count(*[_type == "order" && uid == "${uid}" && shipping_status == "1"])`)
+
+   const allShipped = client.fetch(`count(*[_type == "order" && uid == "${uid}" && shipping_status == "2"])`)
+
+    const allDelivered = client.fetch(`count(*[_type == "order" && uid == "${uid}" && shipping_status == "3"])`)
+  
+  
+  const [getUserAllOrders, getUserAllProcessing, getUserAllShipped, getUserAllDelivered] = await Promise.all([allOrders, allProcessing, allShipped, allDelivered])
+
+  return {getUserAllOrders, getUserAllProcessing, getUserAllShipped, getUserAllDelivered}
+
+}
+
+
+export async function markNotificationsAsRead(userId: string | undefined) {
+  try {
+    // Fetch the first 5 unread documents for the user
+    const docsToUpdate = await client.fetch(`*[_type == "order" && uid == "${userId}" && isRead == false]`,);
+
+    if (docsToUpdate.length === 0) return
+
+    // Create a transaction to update all fetched documents
+    const transaction = client.transaction();
+    docsToUpdate.forEach((doc:{_id:string}) => {
+      transaction.patch(doc._id, (patch) => patch.set({ isRead: true }));
+    });
+
+    // Commit the transaction
+    await transaction.commit();
+    revalidateTag('notifications')
+  } catch (error) {
+    console.error("Error updating notifications:", error);
+  }
+}
+
+export async function countUnreadNotifications(userId: string | undefined) {
+    // Fetch the first 5 unread documents for the user
+    const countUnread = await client.fetch(`count(*[_type == "order" && uid == $userId && isRead == false])`, {userId},{ next: { tags: ["notifications"]}})
+    return countUnread;
+}
+
+
+export const getUserOrders = async(userId: string | undefined)=>{
+  const query = `*[_type == "order" && uid == "${userId}"]{total_amount, shipping_status, _id, transaction_status, _createdAt, reference_id, uid}`
+  const response = await client.fetch(query);
+  return response
+}
+
+export const getUserOrderDetails = async(orderId: string | undefined, userId:string | undefined)=>{
+  const query = `*[_type == "order" && _id == "${orderId}" && uid == "${userId}"][0]`
+  const response = await client.fetch(query);
+  return response
+
+}
+
+export const getOrderShippingStatus = async(orderId: string | undefined, userId:string | undefined)=>{
+  const query = `*[_type == "order" && _id == "${orderId}" && uid == "${userId}"][0]{reference_id, eta, shipping_status, _id,  _createdAt}`
+  const response = await client.fetch(query);
+  return response
+
+}

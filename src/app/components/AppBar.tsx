@@ -72,8 +72,8 @@ export default function PrimarySearchAppBar({session}:{session: Session | null})
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem href='/dashboard' onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <Link className=' text-inherit no-underline' href={'/customer'}><MenuItem  onClick={handleMenuClose}>Profile</MenuItem></Link>
+      <Link className=' text-inherit no-underline' href={'/customer/orders'}><MenuItem  onClick={handleMenuClose}>My Orders</MenuItem></Link>
       <MenuItem sx={{bgcolor:alpha('#E3364E',0.1), color:"primary.main", ":hover":{bgcolor:alpha('#E3364E',0.2)}}} onClick={()=> signOut()}>SignOut</MenuItem>
     </Menu>
   );

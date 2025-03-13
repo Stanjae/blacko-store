@@ -44,7 +44,6 @@ export default async function Page(props: {
     const newRatings = searchParams.ratings
     const newCategory = searchParams.category
 
-    console.log('ol: ')
 
     const response =  await getAllProducts(newSort as string, newQuery as string, newPriceRange as string, newRatings as string, newCategory as string);
   return (

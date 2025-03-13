@@ -166,7 +166,14 @@ export type CartShippingType = z.infer<typeof cartShippingSchema >
 export type allInfoType = CartFormType & ShippingFormType & {
   state:string;
   lga:string;
-  country:string
+  country:string;
+  uid?:string | undefined;
+  tax?:number | undefined;
+  shipping_fee?:number | undefined;
+  shipping_status?:string | undefined;
+  eta?:string;
+  subtotal:string;
+
 };
 
 export type OrderReferenceType = {
@@ -184,4 +191,69 @@ export type OrderReferenceType = {
   paymentReference:string;
   products:string;
   transaction_status:"SUCCESS"|"ERROR"|string
+}
+
+
+export type SanityUserProfile = {
+  _type: 'user';
+  name: string;
+  bio?:string;
+  phoneNumber?:string;
+  id: string;
+  _updatedAt: string;
+  _createdAt: string;
+  _id: string;
+  email: string;
+  emailVerified: null;
+  fullname?:string;
+  image: string;
+  role: 'customer' | 'vendor';
+  _rev: string;
+}
+
+export type MiniUserOrdersType = {
+    total_amount: number;
+    _id: string;
+    transaction_status: 'SUCCESS' | 'ERROR',
+    _createdAt: '2025-03-12T21:16:55Z' | string,
+    reference_id: string;
+    uid: string;
+    shipping_status: '3' | '2' | "1",
+}
+
+export type UserOrderDetailType = {
+  tax: number;
+  shipping_fee: number;
+  total_amount: number;
+  subtotal: number;
+  customer_email: string;
+  _id: string;
+  transaction_status: 'SUCCESS' | 'ERROR'|string,
+  customer_address: string;
+  customer_state: string;
+  customer_zipcode: string;
+  customer_name: string;
+  products: string;
+  _createdAt: '2025-03-12T21:16:55Z' | string,
+  paymentReference: string;
+  shipping_status: '3' | '2' | "1",
+  note?: string;
+  customer_phone_number: string;
+  customer_country: string;
+  reference_id: string;
+  isRead: boolean;
+  uid: string;
+  customer_lga: string;
+  eta: string | 'Wed, 19 Mar 2025 21:16:24 GMT'
+}
+
+export type RetrievedProductsType ={
+  "_id":string;
+  "price":number;
+  "title":string;
+  "thumbnail":string;
+  "benchMarkQuty":number,
+  "quantity":number;
+  "variantInfo":null,
+  "shippingStatus":number
 }

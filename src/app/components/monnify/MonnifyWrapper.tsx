@@ -7,18 +7,19 @@ import { allInfoType, MonnfiyRespone } from "@/utils/definitions";
 import { useCounterStore } from "@/app/providers/storeProvider";
 import { createTransactionOrder, updateProductQuantity } from "@/app/lib/data";
 import { useRouter } from "next/navigation";
+import { getDeliveryDate } from "@/utils/utilityFn";
 
 
 const cartinfo = JSON.parse(sessionStorage.getItem('cartForm') || '{}');
 const shippinginfo = JSON.parse(sessionStorage.getItem('shippingForm') || '{}');
-function  MonnifyButton() {
+function  MonnifyButton({uid}:{uid:string | undefined}) {
 	const  monnify  =  new  Monnify("MK_TEST_24YVYTQYZQ", "8359192849");
 	const {push} = useRouter()
 
-	const {finalTotalPrice, newCart, clearCart} = useCounterStore((state) => state);
+	const {finalTotalPrice, newCart, clearCart, totalShippingPrice, totalTax, totalPrice} = useCounterStore((state) => state);
 
 
-	const userInfo:allInfoType = {...cartinfo, ...shippinginfo};
+	const userInfo:allInfoType = {...cartinfo, ...shippinginfo, uid, subtotal:totalPrice().toFixed(2), shipping_fee:totalShippingPrice().toFixed(2), tax:totalTax().toFixed(2), eta:getDeliveryDate(7), shipping_status:"1"};
 
 	const handleOperations =async(response:MonnfiyRespone)=>{
 		await createTransactionOrder(response, userInfo, JSON.stringify(newCart));

@@ -1,10 +1,12 @@
 import PaymentLayout from '@/app/components/cartToPayment/PaymentLayout'
-import React from 'react'
+import React, { Suspense } from 'react'
 
 const page = () => {
   return (
     <div>
-      <PaymentLayout/>
+      <Suspense>
+        <PaymentLayout/>
+      </Suspense>  
     </div>
   )
 }

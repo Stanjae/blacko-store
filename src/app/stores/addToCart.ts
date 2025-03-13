@@ -16,6 +16,7 @@ export type CounterActions = {
   clearCart: () => void;
   totalPrice: () => number;
   totalCount: () => number;
+  totalTax: () => number;
   totalShippingPrice: () => number;
   finalTotalPrice:() => number;
 }
@@ -91,10 +92,14 @@ export const createCounterStore = (
       );
     },
 
+    totalTax: () => {
+      return 100.00
+    },
+
     finalTotalPrice: () => {
       return get().newCart.reduce(
         (total, item) => total + item.price * (item.quantity || 1) + item.shippingStatus,
-        0
+        100
       );
     },
 

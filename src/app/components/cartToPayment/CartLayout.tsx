@@ -13,7 +13,7 @@ import {zodResolver} from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
 
 const CartLayout = ({states}:{states:string[]}) => {
-    const {newCart, totalPrice, totalShippingPrice, finalTotalPrice} = useCounterStore((state) => state);
+    const {newCart, totalPrice, totalShippingPrice, finalTotalPrice, totalTax} = useCounterStore((state) => state);
 
     const router = useRouter()
 
@@ -63,17 +63,21 @@ const CartLayout = ({states}:{states:string[]}) => {
                     <div className=' space-y-2'>
                         <Stack className=' items-center justify-between' direction={'row'}>
                             <Typography className=' text-sm' variant='body1' color='textDisabled'>SubTotal:</Typography>
-                            <Typography className=' text-lg font-medium' variant='h4'>${totalPrice().toFixed(2)}</Typography>
+                            <Typography className=' text-lg font-medium' variant='h4'>&#8358;{totalPrice().toFixed(2)}</Typography>
                         </Stack>
                         { show && (<div>
                         <Stack className=' items-center justify-between' direction={'row'}>
                             <Typography className=' text-sm' variant='body1' color='textDisabled'>Shipping:</Typography>
-                            <Typography color='success' className=' text-base font-medium' variant='h4'> + ${totalShippingPrice().toFixed(2)}</Typography>
+                            <Typography color='success' className=' text-base font-medium' variant='h4'> + &#8358;{totalShippingPrice().toFixed(2)}</Typography>
+                        </Stack>
+                        <Stack className=' items-center justify-between' direction={'row'}>
+                            <Typography className=' text-sm' variant='body1' color='textDisabled'>Tax:</Typography>
+                            <Typography color='success' className=' text-base font-medium' variant='h4'> + &#8358;{totalTax().toFixed(2)}</Typography>
                         </Stack>
                         <Divider variant='inset'/>
                         <Stack className=' items-center justify-between' direction={'row'}>
-                            <Typography className=' text-sm' variant='body1' color='textDisabled'>Total:</Typography>
-                            <Typography color='success' className=' text-base font-medium' variant='h4'> + ${finalTotalPrice().toFixed(2)}</Typography>
+                            <Typography className=' text-lg' variant='body1' color='textDisabled'>Total:</Typography>
+                            <Typography color='success' className=' text-lg font-medium' variant='h4'> + &#8358;{finalTotalPrice().toFixed(2)}</Typography>
                         </Stack>
                         </div>)
                         }

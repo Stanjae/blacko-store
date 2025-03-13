@@ -13,7 +13,7 @@ import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 
 const Checkout2Layout = ({states}:{states:string[]}) => {
-    const { totalPrice, totalShippingPrice, finalTotalPrice} = useCounterStore((state) => state);
+    const { totalPrice, totalShippingPrice, finalTotalPrice, totalTax} = useCounterStore((state) => state);
 
     const router = useRouter()
 
@@ -99,20 +99,20 @@ const Checkout2Layout = ({states}:{states:string[]}) => {
                     <div className=' space-y-2'>
                         <Stack className=' items-center justify-between' direction={'row'}>
                             <Typography className=' text-sm' variant='body1' color='textDisabled'>SubTotal:</Typography>
-                            <Typography className=' text-lg font-medium' variant='h4'>${totalPrice().toFixed(2)}</Typography>
+                            <Typography className=' text-lg font-medium' variant='h4'>&#8358;{totalPrice().toFixed(2)}</Typography>
                         </Stack>
 
                         <Stack className=' items-center justify-between' direction={'row'}>
                             <Typography className=' text-sm' variant='body1' color='textDisabled'>Shipping:</Typography>
-                            <Typography color='success' className=' text-base font-medium' variant='h4'> + ${totalShippingPrice().toFixed(2)}</Typography>
+                            <Typography color='success' className=' text-base font-medium' variant='h4'> + &#8358;{totalShippingPrice().toFixed(2)}</Typography>
                         </Stack>
                         <Stack className=' items-center justify-between' direction={'row'}>
                             <Typography className=' text-sm' variant='body1' color='textDisabled'>Tax:</Typography>
-                            <Typography color='success' className=' text-base font-medium' variant='h4'> + $0</Typography>
+                            <Typography color='success' className=' text-base font-medium' variant='h4'> + &#8358;{totalTax()}</Typography>
                         </Stack>
                     </div>
                     <Divider/>
-                    <Typography gutterBottom className=' font-semibold text-[25px] leading-[37.5px]' color='secondary' variant='h2'>${finalTotalPrice().toFixed(2)}</Typography>
+                    <Typography gutterBottom className=' font-semibold text-[25px] leading-[37.5px]' color='secondary' variant='h2'>&#8358;{finalTotalPrice().toFixed(2)}</Typography>
                 </Paper>
             </Grid2>
         </Grid2>
