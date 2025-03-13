@@ -78,15 +78,15 @@ const ProductDetailLayout = ({product}:{product:DetailedProductStoreType}) => {
     
   return (
     <Grid2 container spacing={'87px'}>
-      <Grid2 display={'flex'}  size={'auto'}>
-        {product?.images && <Stack spacing={1}>
+      <Grid2 display={'flex'} gap={{xs:3, md:1}} flexDirection={{xs:'column', md:'row'}} size={{md:'auto', xs:12}}>
+        {product?.images && <Stack direction={{xs:'row', md:'column'}} order={{xs:2, md:1}} spacing={1}>
             {product?.images?.map((image, index) => (
                 <div className={` ${image?.asset?._ref == variety?.asset?._ref ? "bg-slate-800":"bg-transparent"}  p-1`} key={index}>
                     <Image onMouseOver={()=> setVariety(image)} className={` cursor-pointer`} width={50} height={50}  src={urlFor(image).url()} alt={image?._type}/>
                 </div>
             ))} 
         </Stack>}
-        <Image className='transition-all ml-2 rounded-xl duration-500 object-cover w-[600px] h-[498px]' src={urlFor(variety).quality(100).width(1250).height(1250).url()} width={600} height={498} alt={product?.title}/>
+        <Image className='transition-all ml-2 order-1 md:order-2 rounded-xl duration-500 object-cover w-full h-auto  md:w-[600px] md:h-[498px]' src={urlFor(variety).quality(100).width(1250).height(1250).url()} width={600} height={498} alt={product?.title}/>
       </Grid2>
       <Grid2 size={'grow'}>
         <Typography className=' text-3xl font-medium leading-[45px]' gutterBottom variant='h1'>{product?.title}</Typography>
