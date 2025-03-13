@@ -47,7 +47,7 @@ const Checkout2Layout = ({states}:{states:string[]}) => {
   return (
     <Box component={'div'}>
         <Grid2 spacing={3} container>
-            <Grid2 component={'div'} className=' space-y-5' size={8}>
+            <Grid2 component={'div'} className=' space-y-5' size={{md:8, xs:12}}>
                 <form className=' space-y-5'  onSubmit={handleSubmit(onSubmit)}>
                     <Paper className='p-4 space-y-5'>
                         <Typography component={'div'} className=' flex gap-2 items-center font-medium text-sm'>
@@ -94,7 +94,7 @@ const Checkout2Layout = ({states}:{states:string[]}) => {
                 </form>
                 
             </Grid2>
-            <Grid2 size={4}>
+            <Grid2 size={{md:4, xs:12}}>
                 <Paper className='p-4 space-y-5'>
                     <div className=' space-y-2'>
                         <Stack className=' items-center justify-between' direction={'row'}>
