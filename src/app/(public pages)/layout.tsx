@@ -13,7 +13,7 @@ export default async function PublicPagesLayout({
 }>) {
   const session = await auth()
   return (
-    <main>
+    <main className=" overflow-hidden relative">
         <NavBar session={session}/>
         <ScrollNavBar session={session}/>
         <Box py={'40px'} px={{sm:'40px', xs:'20px'}} bgcolor={'paper.main'} color={'secondary.main'}>

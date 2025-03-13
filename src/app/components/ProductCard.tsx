@@ -42,7 +42,7 @@ const ProductCard = ({product}:{product:ProductStoreType}) => {
         <Image className='hover:scale-110 transition-all duration-500 object-contain w-full h-auto' src={urlFor(product?.thumbnail).quality(100).width(1250).height(1250).url()} width={278} height={278} alt={product?.title}/>
         <CardContent className=' text-center'>
             <Typography color='textPrimary' href={`/product/${product?.slug?.current}`} component={Link} className='text-sm no-underline font-medium leading-[21px]'>{product?.title?.substring(0,25) + "..."}</Typography>
-            <Typography color='primary' className=' text-sm leading-[21px] font-semibold py-1 '>{'$' + product.basePrice}</Typography>
+            <Typography color='primary' className=' text-sm leading-[21px] font-semibold py-1 '>&#8358;{product.basePrice}</Typography>
             <div className=' flex justify-center items-center gap-2'>
                 <Rating size='small' name="read-only" value={averageRating} readOnly />
                 <Typography color='textDisabled' className=' text-xs' component={'span'}>({numberOfReviews})</Typography>

@@ -31,7 +31,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body id="_next" className={`${geistSans.variable} ${geistMono.variable} antialiased `}>
+      <body id="_next" className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-hidden `}>
       <StyledEngineProvider injectFirst>
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme} noSsr disableTransitionOnChange>

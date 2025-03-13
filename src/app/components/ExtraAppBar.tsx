@@ -26,7 +26,7 @@ const CustomLink = styled(Link)(({ theme }) => [
 const ExtraAppBar = () => {
     const pathname = usePathname()
   return (
-    <Stack bgcolor={'custombg.main'} direction={'row'} className='sm:px-10 hidden sm:flex items-center py-3 justify-between'>
+    <Stack bgcolor={'custombg.main'} direction={'row'} className='sm:px-10 hidden md:flex items-center py-3 justify-between'>
         <ItemsMenuBar/>
         <div className=' flex gap-x-8 items-center'>
             {navlinks.map(item => (

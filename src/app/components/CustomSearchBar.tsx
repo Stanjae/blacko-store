@@ -65,7 +65,7 @@ const CustomSearchBar = () => {
       }, 300);
 
   return (
-    <Search className=' hidden sm:block'>
+    <Search className=' hidden md:block'>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>

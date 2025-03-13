@@ -15,17 +15,17 @@ const ProductStore = ({products}:{products:ProductStoreType[]}) => {
     <Box component={'div'} className=' space-y-6'>
         <ProductStoreControls newLayout={newLayout} setNewLayout={setNewLayout}/>
         <div className=' flex relative gap-2'>
-            <Paper component={'div'} elevation={0} className=' space-y-6 py-2 w-[20%]'>
+            <Paper component={'div'} elevation={0} className=' hidden md:block w-0 space-y-6 py-2 md:w-[20%]'>
                 <RangeSlider/>
                 <Divider/>
                 <RatingFilters/>
             </Paper>
-            <div className=' w-[80%]'>
-               <Grid2 spacing={3} columns={{sm:newLayout ? 3:1}} container>
+            <div className=' w-full md:w-[80%]'>
+               <Grid2 spacing={3} bgcolor={'ThreeDFace'} columns={{xs:newLayout ? 3:1}} container>
                 {products?.map((item)=> (
-                    <Grid2 key={item?._id} size={1}>
-                    <ProductCard product={item}/>
-                </Grid2>
+                    <Grid2 key={item?._id} size={{xs:3, md:1}}>
+                        <ProductCard product={item}/>
+                    </Grid2>
                 ))}
                 
                </Grid2>

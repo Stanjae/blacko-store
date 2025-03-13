@@ -4,6 +4,7 @@ import { GridView, List } from '@mui/icons-material';
 import { Box, FormControl, IconButton, InputLabel, MenuItem, Select, SelectChangeEvent, Stack, Typography } from '@mui/material'
 import { useRouter, useSearchParams } from 'next/navigation';
 import React from 'react'
+import MobileFilters from './MobileFilters';
 
 const ProductStoreControls = ({setNewLayout, newLayout}:{newLayout:boolean; setNewLayout:React.Dispatch<React.SetStateAction<boolean>>}) => {
     const [age, setAge] = React.useState('');
@@ -33,15 +34,16 @@ const ProductStoreControls = ({setNewLayout, newLayout}:{newLayout:boolean; setN
       {searchQueryValue && <Typography variant='h5'>Search Results for: {searchQueryValue}</Typography>}
       <Box
         component={"div"}
-        className=" gap-4 ml-auto flex items-center"
+        className=" gap-4 w-full md:w-auto  md:ml-auto flex flex-col md:flex-row items-center"
       >
-        <div className=' flex items-center gap-2'>
+        <div className=' flex w-full md:w-auto  items-center gap-2'>
           <Typography>Sort By: </Typography>
-          <FormControl className=" w-40" size='small' >
+          <FormControl className=" block grow md:w-40" size='small' >
             <InputLabel id="demo-simple-select-label">Sort</InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
+              className=' w-full'
               value={age}
               label="Age"
               onChange={handleChange}
@@ -51,7 +53,7 @@ const ProductStoreControls = ({setNewLayout, newLayout}:{newLayout:boolean; setN
           </FormControl>
         </div>
 
-        <div className=" gap-2 flex items-center">
+        <div className=" gap-2 w-full md:w-auto flex items-center">
           <Typography variant="body2">View :</Typography>
           <div className=" flex items-center">
             <IconButton onClick={()=> setNewLayout(true)} color={newLayout ? "primary":"default"} size="small">
@@ -61,6 +63,7 @@ const ProductStoreControls = ({setNewLayout, newLayout}:{newLayout:boolean; setN
               <List />
             </IconButton>
           </div>
+          <MobileFilters/>
         </div>
       </Box>
     </Stack>
